@@ -16,10 +16,15 @@ steps:
   displayName: 'Install Node.js'
 - task: Npm@1
   inputs:
+    command: 'custom'
+    workingDir: '${Build.SourcesDirectory}'
+    customCommand: 'install --global gatsby-cli'
+- task: Npm@1
+  inputs:
     command: 'install'
-    workingDir: '$(Build.SourcesDirectory)'
+    workingDir: '${Build.SourcesDirectory}'
 - task: Npm@1
   inputs:
     command: 'custom'
-    workingDir: '$(Build.SourcesDirectory)'
-    customCommand: 'run build-$(Environment)'
+    workingDir: '${Build.SourcesDirectory}'
+    customCommand: 'run build$(Environment)'
